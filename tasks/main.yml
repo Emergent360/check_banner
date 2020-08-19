@@ -1,2 +1,36 @@
 ---
 # tasks file for config_drift
+- name: configure interface settings
+      ios_config:
+        lines:
+          - description test
+        parents: interface GigabitEthernet1
+      check_mode: true
+      register: changeFlag
+
+- name: look at changeFlag
+  debug:
+    var: changeFlag
+
+- name: SERVICENOW IF CHANGED
+  block:
+    - name: CREATE AN INCIDENT
+      snow_record:
+        username: "{{snow_username}}"
+        password: "{{snow_password}}"
+        instance: "{{snow_instance}}"
+        state: present
+        table: incident
+        data:
+          short_description: "CONFIG OUT OF COMPLIANCE ON {{inventory_hostname}}"
+          severity: 3
+          priority: 2
+          caller_id: "System Administrator"
+          comments: "The configuration:\n--------\n {% for item in changeFlag.updates %}{{item}}\n{% endfor %}\n--------\n is missing on {{inventory_hostname}}"
+      register: snow_var
+      delegate_to: localhost
+
+    - name: DEBUG SNOW_VAR
+      debug:
+        var: snow_var.record.number
+  when: changeFlag.changed
