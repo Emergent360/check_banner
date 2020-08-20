@@ -1,6 +1,6 @@
 ---
 # tasks file for config_drift
-- name: configure interface settings
+- name: configure acl settings
   ios_config:
     lines:
       - 10 permit ip host 192.0.2.1 any log
