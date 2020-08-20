@@ -1,15 +1,9 @@
 ---
 # tasks file for config_drift
-- name: configure acl settings
+- name: configure banner settings
   ios_config:
     lines:
-      - 10 permit ip host 192.0.2.1 any log
-      - 20 permit ip host 192.0.2.2 any log
-      - 30 permit ip host 192.0.2.3 any log
-      - 40 permit ip host 192.0.2.4 any log
-      - 50 permit ip host 192.0.2.5 any log
-    parents: ip access-list extended test
-    before: no ip access-list extended test
+      - "BANNER FOR DEVICE {{ inventory_hostname }}"
     match: exact
   check_mode: true
   register: changeFlag
