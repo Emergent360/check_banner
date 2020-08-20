@@ -1,10 +1,10 @@
 ---
 # tasks file for config_drift
 - name: configure banner settings
-  ios_config:
-    lines:
-      - "BANNER FOR DEVICE {{ inventory_hostname }}"
-#    match: line
+  ios_banner:
+    banner: login
+    text: "BANNER FOR DEVICE {{ inventory_hostname }}"
+    state: present
   check_mode: true
   register: changeFlag
 
