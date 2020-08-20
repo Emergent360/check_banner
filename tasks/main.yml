@@ -4,7 +4,7 @@
   ios_config:
     lines:
       - "BANNER FOR DEVICE {{ inventory_hostname }}"
-    match: exact
+    match: line
   check_mode: true
   register: changeFlag
 
