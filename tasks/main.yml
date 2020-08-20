@@ -1,15 +1,14 @@
 ---
 # tasks file for config_drift
 - name: configure interface settings
-  ios_config:
-    lines:
-      - "BANNER FOR DEVICE {{ inventory_hostname }}"
-  check_mode: true
-  register: changeFlag
+  ios_command:
+    commands:
+      - show banner login
+  register: banner
 
 - name: look at changeFlag
   debug:
-    var: changeFlag
+    var: banner.stdout[0]
 
 - name: SERVICENOW IF CHANGED
   block:
@@ -32,4 +31,4 @@
     - name: DEBUG SNOW_VAR
       debug:
         var: snow_var.record.number
-  when: changeFlag.changed
+  when: not banner.stdout[0]
