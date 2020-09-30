@@ -1,2 +1,7 @@
 ---
 # defaults file for config_drift
+ansible_become: true
+ansible_become_method: enable
+ansible_connection: network_cli
+ansible_network_os: ios
+ansible_user: ec2-user
