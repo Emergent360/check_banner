@@ -1,17 +1,17 @@
 ---
 # handlers file for config_drift
 - name: create incident for banner
-    snow_record:
-      username: "{{ snow_username }}"
-      password: "{{ snow_password }}"
-      instance: "{{ snow_instance }}"
-      state: present
-      table: incident
-      data:
-        short_description: "CONFIG OUT OF COMPLIANCE ON {{inventory_hostname}}"
-        severity: 3
-        priority: 2
-        caller_id: "System Administrator"
-        comments: "The configuration:\n--------\n banner login\n--------\n is missing on {{inventory_hostname}}"
-    register: snow_var
-    delegate_to: localhost
+  snow_record:
+    username: "{{ snow_username }}"
+    password: "{{ snow_password }}"
+    instance: "{{ snow_instance }}"
+    state: present
+    table: incident
+    data:
+      short_description: "CONFIG OUT OF COMPLIANCE ON {{inventory_hostname}}"
+      severity: 3
+      priority: 2
+      caller_id: "System Administrator"
+      comments: "The configuration:\n--------\n banner login\n--------\n is missing on {{inventory_hostname}}"
+  register: snow_var
+  delegate_to: localhost
