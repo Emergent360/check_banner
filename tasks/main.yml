@@ -14,7 +14,3 @@
     state: present
   register: banner
   check_mode: "{{ task_check_mode }}"
-
-- name: look at changeFlag
-  debug:
-    var: banner
