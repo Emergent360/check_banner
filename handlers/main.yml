@@ -15,3 +15,7 @@
       comments: "The configuration:\n--------\n banner login\n--------\n is missing on {{inventory_hostname}}"
   register: snow_var
   delegate_to: localhost
+
+- name: show servicenow incident number
+  debug:
+    var: snow_var.record.number
