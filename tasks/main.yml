@@ -14,3 +14,4 @@
     state: present
   register: banner
   check_mode: "{{ task_check_mode }}"
+  notify: create incident for banner
