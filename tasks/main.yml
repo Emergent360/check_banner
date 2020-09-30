@@ -11,7 +11,7 @@
       All activities performed on this device are logged and monitored.
     state: present
   register: banner
-  check_mode: true
+  check_mode: "{{ task_check_mode }}"
 
 - name: look at changeFlag
   debug:
